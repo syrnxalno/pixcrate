@@ -1,0 +1,35 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+test-resize
+test.rest
+test
+testJobAdder.js
+
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+
+
+# Image processing output files
+public/uploads/
+public/temp/
+public/images/generated/
+
+
+# Build files
+dist/
+build/
+coverage/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+
