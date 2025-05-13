@@ -4,12 +4,26 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-const flow = new FlowProducer({ connection: redisConnect });
+// const flow = new FlowProducer({ connection: redisConnect });
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+let flow;
+let isWorkersReady = false;
+
+export const initializeFlowProducer = () => {
+    flow = new FlowProducer({ connection: redisConnect });
+};
+
+export const markWorkersAsReady = () => {
+    isWorkersReady = true;
+};
 
 export const processImagePipeline = async (req, res) => {
     try {
+        if(!isWorkersReady){
+            return res.status(503).json({message : "Workers are not ready. Try again later."});
+        }
+
         if(!req.file){
             return res.status(400).json({ message: "No file uploaded" });
         }
