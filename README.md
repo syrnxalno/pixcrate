@@ -1,5 +1,5 @@
 # Distributed Queue System for Image Processing
-![wip](https://img.shields.io/badge/status-WIP-blueviolet)  ![Build Status](https://github.com/syrnxalno/dqs_image_processing/actions/workflows/ci.yml/badge.svg)
+![wip](https://img.shields.io/badge/status-WIP-blueviolet)  ![Build Status](https://github.com/syrnxalno/pixcrate/actions/workflows/ci.yml/badge.svg)
 - Pipeline of four worker queues - resizing, compression, watermark and saving
 - ```Node.js``` runtime environment
 - ```sharp``` for image processing
