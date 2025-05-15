@@ -5,6 +5,7 @@ test-resize
 test.rest
 test
 testJobAdder.js
+uploads/
 
 
 # Environment variables
