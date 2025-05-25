@@ -17,6 +17,9 @@ importers:
       bullmq:
         specifier: ^5.48.1
         version: 5.49.2
+      connect-redis:
+        specifier: ^8.1.0
+        version: 8.1.0(express-session@1.18.1)
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -44,6 +47,9 @@ importers:
       passport-github2:
         specifier: ^0.1.12
         version: 0.1.12
+      redis-connect:
+        specifier: ^0.2.0
+        version: 0.2.0
       sharp:
         specifier: ^0.34.0
         version: 0.34.1
@@ -236,6 +242,9 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
+  bindings@1.5.0:
+    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+
   body-parser@2.2.0:
     resolution: {integrity: sha512-02qvAaxv8tp7fBa/mw1ga98OGm+eCbqzJOKoRt70sLmfEEi+jyBYVTDGfCL/k06/4EMk/z01gCe7HoCH/f2LTg==}
     engines: {node: '>=18'}
@@ -304,6 +313,12 @@ packages:
   concat-stream@1.6.2:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
     engines: {'0': node >= 0.8}
+
+  connect-redis@8.1.0:
+    resolution: {integrity: sha512-Km0EYLDlmExF52UCss5gLGTtrukGC57G6WCC2aqEMft5Vr4xNWuM4tL+T97kWrw+vp40SXFteb6Xk/7MxgpwdA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      express-session: '>=1'
 
   content-disposition@1.0.0:
     resolution: {integrity: sha512-Au9nRL8VNUut/XSzbQA38+M78dzP4D+eqg3gfJHMIHHYa3bg067xj1KxMUWj+VULbiZMowKngFFbKczUrNJ1mg==}
@@ -411,6 +426,9 @@ packages:
     resolution: {integrity: sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==}
     engines: {node: '>= 18'}
 
+  file-uri-to-path@1.0.0:
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+
   filelist@1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
 
@@ -469,6 +487,10 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
+
+  hiredis@0.1.17:
+    resolution: {integrity: sha512-fto1AYrv5M4H9PDnWsOza2pdhoUlDKNSlzobRX/G/9kpjSNjnjJSVkpzamWsQhEQ3KeJaWL2PL23P4dZYxqlXg==}
+    engines: {node: '>= 0.6.0'}
 
   http-errors@2.0.0:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
@@ -598,6 +620,9 @@ packages:
     resolution: {integrity: sha512-VzGiVigcG9zUAoCNU+xShztrlr1auZOlurXynNvO9GiWD1/mTBbUljOKY+qMeazBqXgRnjzeEgJI/wyjJUHg9A==}
     engines: {node: '>= 6.0.0'}
 
+  nan@1.1.2:
+    resolution: {integrity: sha512-J7y8XfGMJyLdCesSUmrjwFqK+5Do+TxVthz/lDcfF8olnl3y8pNOw+8yL4mblVSc2DW24n2SyiD736JiVA58Vg==}
+
   negotiator@1.0.0:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
@@ -704,6 +729,9 @@ packages:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
 
+  redis-connect@0.2.0:
+    resolution: {integrity: sha512-l1asm403RpCzwJA5bkMcLnO0dQ5IEAbMC9GgdByLoCRL+ENh3Gy8ntDGEY182QBfoGYqHMZPnthn2WIhzkNxkw==}
+
   redis-errors@1.2.0:
     resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
     engines: {node: '>=4'}
@@ -714,6 +742,9 @@ packages:
   redis-parser@3.0.0:
     resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
     engines: {node: '>=4'}
+
+  redis@0.12.1:
+    resolution: {integrity: sha512-DtqxdmgmVAO7aEyxaXBiUTvhQPOYznTIvmPzs9AwWZqZywM50JlFxQjFhicI+LVbaun7uwfO3izuvc1L8NlPKQ==}
 
   router@2.2.0:
     resolution: {integrity: sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==}
@@ -1002,6 +1033,10 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
+  bindings@1.5.0:
+    dependencies:
+      file-uri-to-path: 1.0.0
+
   body-parser@2.2.0:
     dependencies:
       bytes: 3.1.2
@@ -1102,6 +1137,10 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 2.3.8
       typedarray: 0.0.6
+
+  connect-redis@8.1.0(express-session@1.18.1):
+    dependencies:
+      express-session: 1.18.1
 
   content-disposition@1.0.0:
     dependencies:
@@ -1215,6 +1254,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  file-uri-to-path@1.0.0: {}
+
   filelist@1.0.4:
     dependencies:
       minimatch: 5.1.6
@@ -1276,6 +1317,11 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  hiredis@0.1.17:
+    dependencies:
+      bindings: 1.5.0
+      nan: 1.1.2
 
   http-errors@2.0.0:
     dependencies:
@@ -1406,6 +1452,8 @@ snapshots:
       type-is: 1.6.18
       xtend: 4.0.2
 
+  nan@1.1.2: {}
+
   negotiator@1.0.0: {}
 
   node-abort-controller@3.1.1: {}
@@ -1512,6 +1560,11 @@ snapshots:
     dependencies:
       picomatch: 2.3.1
 
+  redis-connect@0.2.0:
+    dependencies:
+      hiredis: 0.1.17
+      redis: 0.12.1
+
   redis-errors@1.2.0: {}
 
   redis-info@3.1.0:
@@ -1521,6 +1574,8 @@ snapshots:
   redis-parser@3.0.0:
     dependencies:
       redis-errors: 1.2.0
+
+  redis@0.12.1: {}
 
   router@2.2.0:
     dependencies:

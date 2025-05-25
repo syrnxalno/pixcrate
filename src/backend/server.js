@@ -14,10 +14,12 @@ import { compressWorker } from './workers/compressWorker.js';
 import { watermarkWorker } from './workers/watermarkWorker.js';
 import { saveImageWorker } from './workers/saveimageWorker.js';
 import { markWorkersAsReady, initializeFlowProducer } from './controllers/imageController.js';
+import setupSession from './middlewares/sessionMiddleware.js';
 
 dotenv.config();
 
 const app = express();
+await setupSession(app);
 const PORT = process.env.PORT || 8080
 app.use(passport.initialize());
 sessionMiddleware(app);
