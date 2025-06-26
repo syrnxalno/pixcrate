@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,10 +39,12 @@ export const processImagePipeline = async (req, res) => {
 
         const inputPath = req.file.path;
 
-        const resizedPath = path.resolve(__dirname, '../test/resized.png');
-        const compressedPath = path.resolve(__dirname, '../test/compressed.png');
-        const watermarkedPath = path.resolve(__dirname, '../test/watermarked.png');
-        const savedPath = path.resolve(__dirname, '../test/saved.png');
+        const uuid = crypto.randomUUID();
+
+        const resizedPath = path.resolve(__dirname, `../test/${uuid}_resized.png`);
+        const compressedPath = path.resolve(__dirname, `../test/${uuid}_compressed.png`);
+        const watermarkedPath = path.resolve(__dirname, `../test/${uuid}_watermarked.png`);
+        const savedPath = path.resolve(__dirname, `../test/${uuid}_final.png`);
 
         // ensure output directories exist before job processing
         [
@@ -84,6 +87,7 @@ export const processImagePipeline = async (req, res) => {
             ]
         });
 
+
         res.status(200).json({
             message: "Image pipeline started",
             jobIds: {
@@ -95,7 +99,7 @@ export const processImagePipeline = async (req, res) => {
         });
 
     } catch (err) {
-        console.error("Pipeline Error:", err); 
+        console.error("Pipeline Error:", err);
         res.status(500).json({ message: "Pipeline failed", error: err.message });
     }
 };
