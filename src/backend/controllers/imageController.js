@@ -103,3 +103,14 @@ export const processImagePipeline = async (req, res) => {
         res.status(500).json({ message: "Pipeline failed", error: err.message });
     }
 };
+
+export const getFinalImage = async (req, res) => {
+  const { uuid } = req.params;
+  const finalPath = path.resolve(__dirname, `../test/${uuid}_final.png`);
+
+  if (!fs.existsSync(finalPath)) {
+    return res.status(404).json({ message: 'File not ready yet or does not exist' });
+  }
+
+  res.download(finalPath, `${uuid}_processed.png`);
+};
