@@ -1,7 +1,6 @@
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import dotenv from 'dotenv';
-//import User from '../models/User.js'; 
 
 dotenv.config();
 
@@ -12,8 +11,6 @@ passport.use(new GitHubStrategy({
   },
   async function(accessToken, refreshToken, profile, done) {
     try {
-      // const user = await User.findOrCreate({ githubId: profile.id });
-      // return done(null, user);
       return done(null,profile);
     } catch (err) {
       return done(err);
@@ -28,9 +25,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    //const user = await User.findById(id);
     done(null, id);
   } catch (err) {
     done(err, null);
   }
 });
+// todo : create models for entities and centralize using index files

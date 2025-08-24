@@ -21,29 +21,3 @@ jobs:
       - name: Install dependencies
         working-directory: src/backend
         run: pnpm install
-# Additional setups :
-      # - name: Lint code
-      #   working-directory: src/backend
-      #   run: pnpm run lint 
-
-      # - name: Run tests
-      #   working-directory: src/backend
-      #   run: pnpm test 
-
-      # - name: Build project
-      #   working-directory: src/backend
-      #   run: pnpm run build 
-
-      # - name: Upload build artifacts
-      #   if: success() # Only run if previous steps are successful
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: build-artifacts
-      #     path: src/backend/dist 
-      # - name: Cache pnpm dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/.pnpm-store
-      #     key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pnpm-
