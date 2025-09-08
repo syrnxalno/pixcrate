@@ -87,9 +87,9 @@ export const processImagePipeline = async (req, res) => {
             ]
         });
 
-
         res.status(200).json({
             message: "Image pipeline started",
+            uuid, // <-- added for frontend download
             jobIds: {
                 save: jobTree.job.id,
                 watermark: jobTree.children[0].job.id,

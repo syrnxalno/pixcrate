@@ -8,6 +8,7 @@ export default function UploadPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showDownload, setShowDownload] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
+  const [fileUuid, setFileUuid] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -54,10 +55,33 @@ export default function UploadPage() {
       const result = await response.json();
 
       console.log('Upload successful:', result);
+      setFileUuid(result.uuid);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (err) {
       console.log('Upload failed:', err);
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!fileUuid) return;
+
+    const downloadUrl = `${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${fileUuid}`;
+
+    try {
+      const response = await fetch(downloadUrl, { method: 'POST' });
+      if (!response.ok) throw new Error('Download failed');
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `processed-${file?.name || 'image'}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -198,7 +222,9 @@ export default function UploadPage() {
             </button>
 
             {showDownload && (
-              <button style={buttonStyle}>Download</button>
+              <button style={buttonStyle} onClick={handleDownload} disabled={!fileUuid}>
+                Download
+              </button>
             )}
           </div>
 
