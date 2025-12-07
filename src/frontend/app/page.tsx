@@ -9,6 +9,7 @@ export default function UploadPage() {
   const [showDownload, setShowDownload] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [fileUuid, setFileUuid] = useState<string | null>(null);
+  const [showDownloadSuccess, setShowDownloadSuccess] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -54,7 +55,6 @@ export default function UploadPage() {
       if (!response.ok) throw new Error('Upload to backend failed');
       const result = await response.json();
 
-      console.log('Upload successful:', result);
       setFileUuid(result.uuid);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
@@ -64,7 +64,7 @@ export default function UploadPage() {
   };
 
   const handleDownload = async () => {
-    if (!fileUuid) return;
+    if (!fileUuid || !file) return;
 
     const downloadUrl = `${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${fileUuid}`;
 
@@ -72,14 +72,39 @@ export default function UploadPage() {
       const response = await fetch(downloadUrl, { method: 'POST' });
       if (!response.ok) throw new Error('Download failed');
 
+      const contentType = response.headers.get("Content-Type");
+      let extension = "jpg";
+
+      if (contentType) {
+        if (contentType.includes("jpeg")) extension = "jpg";
+        else if (contentType.includes("png")) extension = "png";
+        else if (contentType.includes("webp")) extension = "webp";
+      }
+
+      const originalName = file.name.replace(/\.[^/.]+$/, "");
+      const finalFileName = `${originalName}-pixcrate.${extension}`;
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
+
+      const link = document.createElement("a");
       link.href = url;
-      link.download = `processed-${file?.name || 'image'}.png`;
+      link.download = finalFileName;
       document.body.appendChild(link);
       link.click();
       link.remove();
+
+      setShowDownloadSuccess(true);
+
+      setTimeout(() => {
+        setShowDownloadSuccess(false);
+        setFile(null);
+        setFileUuid(null);
+        setShowDownload(false);
+        setStartAnimation(false);
+        setShowSuccess(false);
+      }, 2500);
+
     } catch (err) {
       console.error(err);
     }
@@ -87,12 +112,11 @@ export default function UploadPage() {
 
   useEffect(() => {
     if (startAnimation) {
-      const timer = setTimeout(() => setShowDownload(true), 4200); // 4.2s
+      const timer = setTimeout(() => setShowDownload(true), 4200);
       return () => clearTimeout(timer);
     }
   }, [startAnimation]);
 
-  // Shared styles
   const buttonStyle: CSSProperties = {
     background: 'linear-gradient(135deg, #00ffe0, #00c3ff)',
     color: '#000',
@@ -168,7 +192,6 @@ export default function UploadPage() {
           padding: '2rem',
         }}
       >
-        {/* Upload Card */}
         <div
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
@@ -208,7 +231,6 @@ export default function UploadPage() {
             />
           </div>
 
-          {/* Buttons aligned side by side */}
           <div
             style={{
               display: 'flex',
@@ -228,7 +250,6 @@ export default function UploadPage() {
             )}
           </div>
 
-          {/* Upload success message */}
           {showSuccess && (
             <div
               style={{
@@ -247,9 +268,27 @@ export default function UploadPage() {
               Image uploaded successfully
             </div>
           )}
+
+          {showDownloadSuccess && (
+            <div
+              style={{
+                marginTop: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                color: '#00ffe0',
+                fontWeight: 500,
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00ffe0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Download complete
+            </div>
+          )}
         </div>
 
-        {/* Right-side animation panel */}
         <div style={{ width: '300px', height: '400px', position: 'relative' }}>
           <svg
             width="100%"
@@ -257,7 +296,6 @@ export default function UploadPage() {
             viewBox="0 0 300 400"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Complex maze-like path */}
             <path
               d="M40 40 
                  H160 
@@ -281,7 +319,6 @@ export default function UploadPage() {
             />
           </svg>
 
-          {/* Glowing points + labels */}
           <div style={glowingDotStyle('40px', '40px')}></div>
           <div style={labelStyle('60px', '40px')}>Resize</div>
 
